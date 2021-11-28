@@ -73,3 +73,40 @@ def homepage(request):
 
     data["err"] = err
     return render(request, "home.html", data)
+
+
+def ticket(request):
+    # GET ticket_id or else return to the homepage.
+    ticket_id = request.GET.get("id")
+    if ticket_id == None:
+        return homepage(request)
+
+    err = False
+    try:
+        username, password = _get_email_password()
+    except:
+        err = 1
+
+    if err == False:
+
+        try:
+
+            response = requests.get(f"https://zccmycitstudent.zendesk.com/api/v2/tickets/{ticket_id}", auth=(username, password))
+
+        except:
+
+            return render(request, "home.html",
+                          {"err": "Oops could not connect to internet. Please check your connection!"})
+
+        if response.status_code != 200:
+            if response.status_code == 503:
+                return render(request, "home.html", {"err": "The server might be down right now..."})
+            return render(request, "home.html", {"err": response.json().get("error")})
+
+        data = response.json()
+
+    else:
+        data = {}
+
+    data["err"] = err
+    return render(request, "ticket.html", data)

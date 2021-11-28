@@ -18,7 +18,8 @@ from django.urls import path, include
 import Zendesk.views as views
 
 urlpatterns = [
-    #path('ticket', views.ticket),
+
+    path('ticket', views.ticket),
     path('', views.homepage),
 
 ]
