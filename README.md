@@ -9,7 +9,7 @@
 After completing installation; ensure the response requests tickets from your own subdomain.  
 This can be changed in the views.py file in **_both_** the homepage function and ticket function.
 <br />
-A secrets file must then be added with your email and password you use to view your own tickets - seperated by a newline.
+A secrets file must then be added with your email and password used to view your own tickets - seperated by a newline.
 <br />
 <br />
 *If needs be, please do not hesitate to contact me and we can work something out! Thank you!*
